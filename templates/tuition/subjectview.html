@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+   <div class="col-md-6">
+    <h1>{{sub.name}}</h1> <br>
+    {% for p in sub.subject_set.all %}
+    {{p.title}} by:
+    {{p.user.username}} <br>
+</div>
+
+
+
+{% endfor %} 
+
+</div>
+
+
+
+{% endblock body %}

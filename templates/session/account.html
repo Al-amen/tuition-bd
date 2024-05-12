@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{user.username}},
+Please click this 
+<a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">link</a>
+to activate your account
+If you think, it is not you just igonre this email.
+{% endautoescape %}

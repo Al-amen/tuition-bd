@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mx-auto">
+    <h1 class = "text-center">All-Post are given below</h1>
+
+
+
+<div class="container">
+   
+    {% for p in results %} 
+    <div class="col-md-6 offset-md-2 mb-3 p-3 border">
+        {{p.title}} <br>
+        by {{p.user.username}} :
+        {{p.details}}
+        <a href="{% url 'app:postdetail' pk=p.id %}">...Read more</a> <br>
+    
+    </div>
+
+{% endfor %}
+</div>
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+contact 
+{% endblock title %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+<div class="container">
+    <div class="container">
+        <H1 class="text-center">Contact Page</H1>
+        <div class="col-md-6 offset-md-3">
+    
+            <form action="" method="POST" class="uniForm">
+               
+                {% csrf_token %}
+                {{form | crispy}} 
+               
+                {% comment %}
+                     {{form | crispy}} 
+                {% endcomment %}
+                    
+            
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        
+        </div>
+    </div>
+    
+
+</div>
+
+
+
+
+
+
+
+{% endblock body %}

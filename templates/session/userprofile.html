@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="{{user.userprofile.image.url}}  " class = 'w-30 mt-5 rounded rounded-circle , img-thumbnail' alt="">
+        </div>
+        <div class="col mt-5">
+            Name = {{user.username}} <br>
+            Birth_date = {{user.userprofile.birth_date}} <br>
+            Gender = {{user.userprofile.gender}} <br>
+             Address = {{user.userprofile.address}} <br>
+            Phone = {{user.userprofile.phone}} <br>
+            Nationality = {{user.userprofile.nationality}} <br>
+            Profession = {{user.userprofile.profession}} <br>
+        </div>
+    </div>
+   
+</div>
+
+{% endblock body %}

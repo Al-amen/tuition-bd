@@ -1,0 +1,15 @@
+
+body {
+    background-image: url("{% static 'images/banner.png' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+
+h1{
+    color: green;
+
+
+}
+

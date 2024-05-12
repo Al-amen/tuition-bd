@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+ <h1>fillter page</h1>
+ {% for p in context %}
+ {{p.title}} <br>
+ by {{p.user.username}} :
+ {{p.details}}
+ {% endfor %}
+
+{% endblock body %}
