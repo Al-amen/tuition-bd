@@ -10,7 +10,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
 from app.models import Class_in, Contact, Post, Subject
 from .models import Comment
 from .forms import ContactForm, PostForm
-
+from .templatetags import tag
 
 def search(request):
 
@@ -175,13 +175,18 @@ class PostDetail(DetailView):
         # Continue with the rest of your context data
         comments = Comment.objects.filter(post=post.id, parent=None)
         replies = Comment.objects.filter(post=post.id).exclude(parent=None)
-        
+        DicReplyof = {}
+        for reply in replies:
+            if reply.parent.id not in DicReplyof:
+                DicReplyof[reply.parent.id] = [reply]
+            else:
+                DicReplyof[reply.parent.id].append(reply)
         context["post"] = post
         context['mgs'] = "Details of Post"
         context['liked'] = liked
         context['comments'] = comments
-        context['replies '] = replies 
-
+        context['DicReplyof'] = DicReplyof
+        
         return context
 
 

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
+{% load tag %}
 {% block body %}
+
 
 {% load humanize %}
 
@@ -77,45 +78,53 @@
             <div class="form-group">
                 <label for="">Your comments</label>
                 <input type="text" name="comment" placeholder="Enter your comments" class="form-control">
-                <input type="hidden" name="postid" value={{object.id}}>
+                <input type="hidden" name="postid" value="{{ object.id }}">
                 <input type="hidden" name="parentid" value="">
-            </div> 
-            <button type="submit" class = "mt-2">Add comment</button>
+            </div>
+            <button type="submit" class="mt-2">Add comment</button>
         </form>
     </div>
+    
     <div>
-        
-        {% for comment in comments  %}
+        {% for comment in comments %}
+       
+        <div class="row">
+            <div class="col-md-1">
+                <img src="{{ comment.user.userprofile.image.url }}" class="img-thumbnail rounded-circle" alt="">
+            </div>
+            <div class="col-md-11">
+                <b>{{ comment.user.username }}</b> {{ comment.create_at |naturaltime }} <span class="badge badge-secondary"></span>
+                <div>{{ comment.text }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <form action="{% url 'app:addcomment' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Your reply</label>
+                    <input type="text" name="comment" placeholder="Enter your comments" class="form-control">
+                    <input type="hidden" name="postid" value="{{ object.id }}">
+                    <input type="hidden" name="parentid" value="{{ comment.id }}">
+                </div>
+                <button type="submit" class="mt-2">Add reply</button>
+            </form>
+        </div>
+        <div>
+            {% for reply in DicReplyof|get_reply:comment.id %}
             <div class="row">
                 <div class="col-md-1">
-                    <img src="{{comment.user.userprofile.image.url}}" class = "img-thumbnail rounded-circle "   alt="">
+                    <img src="{{ reply.user.userprofile.image.url }}" class="img-thumbnail rounded-circle" alt="">
                 </div>
                 <div class="col-md-11">
-                    <b>{{comment.user.username}}</b> <span class = "bedge bedge-secondary">{{comment.create_at | naturaltime}}</span>
-                    <div>{{comment.text}}</div>
-                </div>
-                
-                <div class="row">
-                    <form action=" {% url 'app:addcomment' %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="">Your reply</label>
-                            <input type="text" name="comment" placeholder="Enter your comments" class="form-control">
-                            <input type="hidden" name="postid" value={{object.id}}>
-                            <input type="hidden" name="parentid" value="{{comment.id}}">
-                        </div> 
-                        <button type="submit" class = "mt-2">Add reply</button>
-                    </form>
+
+                    <b>{{ reply.user.username }}</b> {{ reply.create_at | naturaltime }}
+                    <div>{{ reply.text }}</div>
                 </div>
             </div>
+            {% endfor %}
+        </div>
         {% endfor %}
-            
     </div>
-
-
-
-
-
-</div>
+    
 
 {% endblock body %}
