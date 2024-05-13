@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'PracticeProject.urls'
+ROOT_URLCONF = 'TuitionBD.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'PracticeProject.wsgi.application'
+WSGI_APPLICATION = 'TuitionBD.wsgi.application'
 
 
 # Database

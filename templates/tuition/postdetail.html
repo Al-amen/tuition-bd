@@ -25,6 +25,7 @@
 
                 {% if request.user == object.user %}
                 <a href="{% url 'app:edit' pk=post.id %}">Edit</a> <br>
+                <a href="{% url 'app:addphoto' id=post.id %}">Addphoto</a> <br>
                 <a href="{% url 'app:delete' pk=post.id %}">Delete</a>
                 {% endif %} <br>
                 {% comment %} Subject = {% for subject in object.subject.all %}

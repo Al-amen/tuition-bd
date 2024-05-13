@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Photo{% endblock title %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+    
+  <div class="col-md-6 offset-md-3">
+    <form action=" {% url 'app:addphoto' id=id %} " method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <lengend class="border-bottom text-center mb-4"><h2>Add new Photo</h2></lengend>
+      {{form|crispy}}
+      <button class="btn btn-outline-info" type = "submit">Submit</button>
+
+    </form>
+  </div>
+ 
+ 
+ {% endif %}
+
+{% endblock body %}

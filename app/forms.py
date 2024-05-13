@@ -3,7 +3,7 @@
 
 
 from django import forms
-from .models import Post, Contact
+from .models import Post, Contact,PostFile
 
 class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -66,4 +66,7 @@ class PostForm(forms.ModelForm):
             })
         }
     
-    
+class FileModelForm(forms.ModelForm):
+   class Meta:
+       model = PostFile
+       fields = ['image']  

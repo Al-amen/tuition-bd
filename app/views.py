@@ -1,15 +1,15 @@
 from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
                                   ListView, UpdateView)
 
-from app.models import Class_in, Contact, Post, Subject
+from app.models import Class_in, Contact, Post, Subject, PostFile
 from .models import Comment
-from .forms import ContactForm, PostForm
+from .forms import ContactForm, PostForm, FileModelForm
 from .templatetags import tag
 
 def search(request):
@@ -300,3 +300,20 @@ def addcomment(request):
           newcom.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def addphoto(request,id):
+    post = Post.objects.get(id=id) 
+    if request.method == "POST":
+        form = FileModelForm(request.POST , request.FILES)
+        if form.is_valid():
+            image = form.cleaned_data['image']
+            obj = PostFile(image=image,post=post)
+            obj.save()
+            messages.success(request, 'Sucessfully uploades image')
+            return redirect('app:postdetail', pk=id)
+    else :
+        form = FileModelForm()
+    context = {
+        'form':form,
+        'id' :id,
+    }
+    return render(request, 'tuition/addphoto.html',context)
