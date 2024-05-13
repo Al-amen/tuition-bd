@@ -7,7 +7,9 @@ from django.utils.html import format_html
 admin.site.site_header = "TuitionBD Admin Panel"
 admin.site.site_title = 'TuitionBD Admin Panel'
 admin.site.index_title = ' '
-
+class ComentsInlines(admin.TabularInline):
+    model = Comment
+    
 class PostAdmin(admin.ModelAdmin):
     #fields = ('user','title')
     exclude = ('user','title')
@@ -19,6 +21,9 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ('salary',)
     list_display_links = ('title', 'user')
     actions = ('change_salary_3000')
+    inlines = [
+        ComentsInlines,
+    ]
     
     def title_html_dispaly(self,obj):
         return format_html(
